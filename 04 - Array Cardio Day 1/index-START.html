@@ -37,28 +37,57 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    console.table(inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600));
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    console.log(inventors.map(inventor => `${inventor.first} ${inventor.last}`));
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    console.table(inventors.sort((i1, i2) => i1.year - i2.year));
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    console.log(inventors.reduce((sum, inventor) => sum + inventor.passed - inventor.year, 0));
 
     // 5. Sort the inventors by years lived
+    console.log(
+      inventors
+        .map(inventor => ({...inventor, lived: inventor.passed - inventor.year}))
+        .sort((i1, i2) => i1.lived - i2.lived)
+    );
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const category = document.querySelector('.mw-category');
+    // const links = [...category.querySelectorAll('a')];
 
+    // const de = links
+    //             .map(link => link.textContent)
+    //             .filter(streetName => streetName.includes('de'));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    console.log(people.sort((p1, p2) => {
+      const [last1, first1] = p1.split(', ')
+      const [last2, first2] = p2.split(', ')
+      return last1 < last2 ? -1 : 1
+    }))
+    
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    console.log(data.reduce((counts, element) => {
+      if (counts[element]) {
+        counts[element] = counts[element] += 1;
+      } else {
+        counts[element] = 1
+      }
+      return counts
+    }, {}))
+    
 
   </script>
 </body>
